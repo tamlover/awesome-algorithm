@@ -1,2 +1,0 @@
-everyday/Solution443.java
- everyday.Solution443
