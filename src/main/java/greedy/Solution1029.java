@@ -1,9 +1,6 @@
 package greedy;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author luli
@@ -11,23 +8,15 @@ import java.util.Set;
  */
 public class Solution1029 {
     public int twoCitySchedCost(int[][] costs) {
-        PriorityQueue<int[]> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(o -> o[1]));
-        for (int i = 0; i < costs.length; i++) {
-            priorityQueue.add(new int[]{i, costs[i][1] - costs[i][0]});
-        }
-        Set<Integer> visited = new HashSet<>();
-        int k = costs.length / 2;
-        while (k-- > 0) {
-            visited.add(priorityQueue.poll()[0]);
-        }
-
         int sum = 0;
+        int[] con = new int[costs.length];
         for (int i = 0; i < costs.length; i++) {
-            if (visited.contains(i)) {
-                sum += costs[i][1];
-            } else {
-                sum += costs[i][0];
-            }
+            sum += costs[i][0];
+            con[i] = costs[i][1] - costs[i][0];
+        }
+        Arrays.sort(con);
+        for (int i = 0; i < con.length / 2; i++) {
+            sum += con[i];
         }
         return sum;
     }
